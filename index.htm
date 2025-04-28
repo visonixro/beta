@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visonixro - Soluciones AppSheet Profesionales</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      /* Default to light theme */
+      :root,
+      .light-theme {
+        --primary-color: #f5f5f5;
+        --secondary-color: #e3f2fd;
+        --accent-color: #304ffe;
+        --text-color: #333333;
+        --text-secondary: #666666;
+        --dark-color: #d0d0d0;
+        --transition: all 0.3s ease;
+      }
+
+      .dark-theme {
+        --primary-color: #0a0a0a;
+        --secondary-color: #1a237e;
+        --accent-color: #304ffe;
+        --text-color: #ffffff;
+        --text-secondary: #b0b0b0;
+        --dark-color: #1a1a1a;
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      /* Navegación */
+      nav {
+        position: fixed;
+        width: 100%;
+        background: transparent;
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 1rem 0;
+        transition: background 0.3s ease;
+      }
+
+      nav.scrolled {
+        background: rgba(var(--primary-color), 0.95);
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+      }
+
+      .nav-logo {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        display: block;
+        background: transparent;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+        color: var(--text-color);
+        padding: 0.5rem;
+      }
+
+      .logo:hover {
+        opacity: 0.9;
+      }
+
+      .logo span {
+        font-size: 1.5rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        color: var(--text-color);
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .nav-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .nav-links a:hover {
+        color: var(--accent-color);
+      }
+
+      .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background: var(--accent-color);
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        transition: var(--transition);
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .theme-toggle i {
+        margin-right: 0.5rem;
+        font-size: 1.2rem;
+      }
+
+      .theme-toggle:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(48, 79, 254, 0.4);
+      }
+
+      /* Header */
+      header {
+        height: 100vh;
+        background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+          url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80")
+            center/cover fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+      }
+
+      .dark-theme header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80")
+            center/cover fixed;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        padding: 2rem;
+        z-index: 1;
+      }
+
+      .hero-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .hero-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        color: var(--text-secondary);
+      }
+
+      /* Botones */
+      .cta-button,
+      .whatsapp-button {
+        display: inline-flex;
+        align-items: center;
+        padding: 1rem 2rem;
+        background: var(--accent-color);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: var(--transition);
+        font-weight: bold;
+      }
+
+      .cta-button i,
+      .whatsapp-button i {
+        margin-right: 0.5rem;
+        font-size: 1.2rem;
+      }
+
+      .cta-button:hover,
+      .whatsapp-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(48, 79, 254, 0.4);
+      }
+
+      /* Secciones */
+      section {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      section h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: var(--text-color);
+      }
+
+      /* Servicios */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .service-card {
+        background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        transition: var(--transition);
+      }
+
+      .dark-theme .service-card {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .service-card i {
+        font-size: 3rem;
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+      }
+
+      .service-card h3 {
+        margin-bottom: 1rem;
+      }
+
+      /* Proyectos */
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .dark-theme .project-card {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .project-image {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .project-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .project-card:hover .project-image img {
+        transform: scale(1.1);
+      }
+
+      .project-card h3,
+      .project-card p {
+        padding: 1.5rem;
+      }
+
+      /* Características */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature {
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .feature i {
+        font-size: 2.5rem;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+      }
+
+      /* Contacto */
+      .contact {
+        background: linear-gradient(145deg, #ffffff, var(--secondary-color));
+        margin: 0 auto;
+        padding: 4rem 2rem;
+        border-radius: 15px;
+        max-width: 1000px;
+      }
+
+      .dark-theme .contact {
+        background: linear-gradient(145deg, #0f0f0f, var(--secondary-color));
+      }
+
+      .contact-content {
+        text-align: center;
+      }
+
+      .contact-info {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .contact-info h3 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-info p {
+        margin-bottom: 2rem;
+        color: var(--text-secondary);
+      }
+
+      /* About Section */
+      .about {
+        background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+        margin: 4rem auto;
+        border-radius: 15px;
+        overflow: hidden;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      .about-text {
+        padding: 2rem;
+      }
+
+      .about-text h3 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .ceo-info {
+        padding: 2rem;
+        background: linear-gradient(145deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
+        border-radius: 15px;
+        margin-top: 2rem;
+      }
+
+      .dark-theme .ceo-info {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      }
+
+      .ceo-details {
+        text-align: center;
+      }
+
+      .ceo-details i {
+        font-size: 3rem;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+      }
+
+      .ceo-details h4 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+      }
+
+      .ceo-details p {
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+      }
+
+      .ceo-details p:last-child {
+        font-style: italic;
+        color: var(--accent-color);
+        margin-top: 1rem;
+      }
+
+      .about-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+      }
+
+      /* Technologies Section */
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .tech-card {
+        background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        transition: var(--transition);
+      }
+
+      .dark-theme .tech-card {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+      }
+
+      .tech-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .tech-card i {
+        font-size: 3rem;
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+      }
+
+      /* Project Features */
+      .project-features {
+        list-style: none;
+        padding: 0 1.5rem 1.5rem;
+      }
+
+      .project-features li {
+        margin: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+
+      .project-features li:before {
+        content: "•";
+        color: var(--accent-color);
+        position: absolute;
+        left: 0;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+        margin: 4rem auto;
+        border-radius: 15px;
+        padding: 4rem 2rem;
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .testimonial-card {
+        background: rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        border-radius: 15px;
+      }
+
+      .dark-theme .testimonial-card {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .testimonial-content p {
+        font-style: italic;
+        margin-bottom: 1.5rem;
+      }
+
+      .testimonial-author h4 {
+        color: var(--accent-color);
+        margin-bottom: 0.25rem;
+      }
+
+      /* Contact Details */
+      .contact-details {
+        margin: 2rem 0;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .contact-item i {
+        color: var(--accent-color);
+        font-size: 1.2rem;
+      }
+
+      /* Benefits Section */
+      .benefits {
+        padding: 6rem 2rem;
+      }
+
+      .benefits-intro {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 4rem;
+      }
+
+      .benefits-intro h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .benefit-card {
+        background: linear-gradient(145deg, #ffffff, #f0f0f0);
+        border-radius: 15px;
+        padding: 2rem;
+        transition: var(--transition);
+      }
+
+      .dark-theme .benefit-card {
+        background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+      }
+
+      .benefit-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .benefit-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .benefit-icon i {
+        font-size: 1.5rem;
+        color: white;
+      }
+
+      .feature-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 1.5rem;
+      }
+
+      .feature-list li {
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-list strong {
+        display: block;
+        color: var(--accent-color);
+        margin-bottom: 0.5rem;
+      }
+
+      .feature-list p {
+        color: var(--text-secondary);
+      }
+
+      /* System Features */
+      .system-features {
+        background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+        padding: 6rem 2rem;
+        margin: 4rem auto;
+        border-radius: 15px;
+      }
+
+      .features-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      .system-card {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 15px;
+        padding: 2rem;
+        transition: var(--transition);
+      }
+
+      .dark-theme .system-card {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .system-card:hover {
+        transform: translateY(-10px);
+        background: rgba(0, 0, 0, 0.08);
+      }
+
+      .dark-theme .system-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .system-icon {
+        font-size: 2.5rem;
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .system-card h3 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .system-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .system-list li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+      }
+
+      .system-list i {
+        color: var(--accent-color);
+      }
+
+      .system-cta {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 15px;
+      }
+
+      .dark-theme .system-cta {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .system-cta h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
+
+      .system-cta p {
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+      }
+
+      /* Lenders Section */
+      .lenders {
+        padding: 6rem 2rem;
+        background: linear-gradient(to bottom, var(--primary-color), var(--dark-color));
+      }
+
+      .lenders-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 4rem;
+      }
+
+      .lenders-intro h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, var(--accent-color), #4a90e2);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .lenders-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        margin-bottom: 4rem;
+      }
+
+      .lender-card {
+        background: rgba(0, 0, 0, 0.03);
+        border-radius: 20px;
+        padding: 2.5rem;
+        transition: var(--transition);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .dark-theme .lender-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .lender-card:hover {
+        transform: translateY(-10px);
+        background: rgba(0, 0, 0, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .dark-theme .lender-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .lender-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(45deg, var(--accent-color), #4a90e2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+
+      .lender-icon i {
+        font-size: 2rem;
+        color: white;
+      }
+
+      .lender-features {
+        list-style: none;
+        padding: 0;
+        margin-top: 2rem;
+      }
+
+      .lender-features li {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .lender-features i {
+        color: var(--accent-color);
+        font-size: 1.2rem;
+        margin-top: 0.2rem;
+      }
+
+      .roles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .role-item {
+        text-align: center;
+        padding: 1.5rem;
+        background: rgba(0, 0, 0, 0.02);
+        border-radius: 15px;
+        transition: var(--transition);
+      }
+
+      .dark-theme .role-item {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .role-item:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      .dark-theme .role-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .role-item i {
+        font-size: 2rem;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+      }
+
+      .role-item h4 {
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+      }
+
+      .role-item p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      .role-extra {
+        text-align: center;
+        color: var(--accent-color);
+        margin-top: 1.5rem;
+        font-weight: 500;
+      }
+
+      .documents-section {
+        background: rgba(0, 0, 0, 0.03);
+        border-radius: 20px;
+        padding: 3rem;
+        margin: 4rem 0;
+      }
+
+      .dark-theme .documents-section {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .documents-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        justify-content: center;
+      }
+
+      .documents-header i {
+        font-size: 2.5rem;
+        color: var(--accent-color);
+      }
+
+      .documents-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .document-item {
+        padding: 1.5rem;
+        background: rgba(0, 0, 0, 0.02);
+        border-radius: 15px;
+        transition: var(--transition);
+      }
+
+      .dark-theme .document-item {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .document-item:hover {
+        background: rgba(0, 0, 0, 0.05);
+        transform: translateY(-5px);
+      }
+
+      .dark-theme .document-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .document-item i {
+        font-size: 2rem;
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+      }
+
+      .lenders-cta {
+        text-align: center;
+        max-width: 800px;
+        margin: 4rem auto 0;
+        padding: 3rem;
+        background: linear-gradient(145deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
+        border-radius: 20px;
+      }
+
+      .dark-theme .lenders-cta {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      }
+
+      .lenders-cta h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, var(--accent-color), #4a90e2);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Responsive Updates for Lenders Section */
+      @media (max-width: 768px) {
+        .lenders-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .roles-grid {
+          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        }
+
+        .documents-section {
+          padding: 2rem;
+        }
+
+        .documents-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Footer */
+      footer {
+        background: #e0e0e0;
+        padding: 4rem 2rem 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .dark-theme footer {
+        background: var(--primary-color);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .footer-logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .footer-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--accent-color);
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .social-links a {
+        color: var(--text-color);
+        font-size: 1.5rem;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        color: var(--accent-color);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+      }
+
+      .footer-info {
+        text-align: left;
+      }
+
+      .footer-info p {
+        margin: 0.5rem 0;
+        color: var(--text-secondary);
+      }
+
+      .footer-services,
+      .footer-contact {
+        text-align: left;
+      }
+
+      .footer-services h4,
+      .footer-contact h4,
+      .footer-links h4 {
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+      }
+
+      /* Floating Action Button (FAB) */
+      .fab-container {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 1000;
+      }
+
+      .fab-main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background: var(--accent-color);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .fab-main:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .fab-main i {
+        font-size: 1.5rem;
+      }
+
+      .fab-menu {
+        position: absolute;
+        bottom: 80px;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: var(--transition);
+      }
+
+      .fab-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .fab-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        text-decoration: none;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        transition: var(--transition);
+      }
+
+      .fab-item:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .fab-item i {
+        font-size: 1.2rem;
+      }
+
+      /* Ensure FAB adapts to dark theme */
+      .dark-theme .fab-main,
+      .dark-theme .fab-item {
+        background: var(--accent-color);
+        color: white;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        section {
+          padding: 4rem 1rem;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+        }
+
+        .about-image {
+          order: -1;
+        }
+
+        .contact-content {
+          grid-template-columns: 1fr;
+        }
+
+        .benefits-grid,
+        .features-container {
+          grid-template-columns: 1fr;
+        }
+
+        .benefit-card,
+        .system-card {
+          margin-bottom: 2rem;
+        }
+
+        .fab-container {
+          bottom: 1.5rem;
+          right: 1.5rem;
+        }
+
+        .fab-main {
+          width: 50px;
+          height: 50px;
+        }
+
+        .fab-item {
+          width: 40px;
+          height: 40px;
+        }
+
+        .fab-menu {
+          bottom: 70px;
+          gap: 0.8rem;
+        }
+      }
+
+      /* Animaciones */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-content">
+        <a href="#" class="logo">
+          <img src="logo.png" alt="Visonixro Logo" class="nav-logo" />
+          <span>VISONIXRO</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#about">Nosotros</a></li>
+          <li><a href="#tecnologias">Tecnologías</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+          <li>
+            <button class="theme-toggle" id="theme-toggle">
+              <i id="theme-icon" class="fas fa-sun"></i> Tema
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <header id="inicio">
+      <div class="hero-content" data-aos="fade-up">
+        <h1>Transformamos tu Negocio con AppSheet</h1>
+        <p>Soluciones digitales personalizadas desde Roatán, Islas de la Bahía, Honduras</p>
+        <a href="https://wa.me/50488632788" class="cta-button">
+          <i class="fab fa-whatsapp"></i> Contactar ahora
+        </a>
+      </div>
+      <div class="hero-overlay"></div>
+    </header>
+
+    <section id="servicios" class="services">
+      <h2 data-aos="fade-up">Nuestros Servicios</h2>
+      <div class="services-grid">
+        <div class="service-card" data-aos="fade-up">
+          <i class="fas fa-mobile-alt"></i>
+          <h3>Apps Móviles Personalizadas</h3>
+          <p>Desarrollo de aplicaciones móviles empresariales con AppSheet, perfectamente adaptadas a tus necesidades específicas.</p>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+          <i class="fas fa-database"></i>
+          <h3>Gestión de Datos</h3>
+          <p>Sistemas inteligentes para administrar tu información empresarial con seguridad y eficiencia.</p>
+        </div>
+        <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+          <i class="fas fa-chart-line"></i>
+          <h3>Automatización</h3>
+          <p>Automatización de procesos empresariales para maximizar la productividad y minimizar errores.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <h2 data-aos="fade-up">Sobre Nosotros</h2>
+      <div class="about-content">
+        <div class="about-text" data-aos="fade-right">
+          <h3>Innovación desde el Caribe</h3>
+          <p>Ubicados en el paraíso tropical de Roatán, Islas de la Bahía, Honduras, Visonixro es líder en desarrollo de soluciones AppSheet para empresas en toda América Latina.</p>
+          <div class="ceo-info">
+            <div class="ceo-details">
+              <i class="fas fa-user-tie"></i>
+              <h4>Miguel Angel Romero</h4>
+              <p>CEO y Fundador</p>
+              <p>"Transformando negocios a través de la tecnología"</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-image" data-aos="fade-left">
+          <img src="logo.png" alt="Roatan" />
+        </div>
+      </div>
+    </section>
+
+    <section id="tecnologias" class="technologies">
+      <h2 data-aos="fade-up">Nuestras Tecnologías</h2>
+      <div class="tech-grid">
+        <div class="tech-card" data-aos="fade-up">
+          <i class="fas fa-cloud"></i>
+          <h3>Google Cloud Platform</h3>
+          <p>Infraestructura robusta y escalable para tus aplicaciones</p>
+        </div>
+        <div class="tech-card" data-aos="fade-up" data-aos-delay="200">
+          <i class="fas fa-table"></i>
+          <h3>Google Sheets</h3>
+          <p>Gestión de datos flexible y familiar</p>
+        </div>
+        <div class="tech-card" data-aos="fade-up" data-aos-delay="400">
+          <i class="fas fa-code"></i>
+          <h3>AppSheet</h3>
+          <p>Plataforma líder en desarrollo no-code</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="projects">
+      <h2 data-aos="fade-up">Proyectos Destacados</h2>
+      <div class="project-grid">
+        <div class="project-card" data-aos="fade-up">
+          <div class="project-image">
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+              alt="Gestión de Inventario"
+            />
+          </div>
+          <h3>Sistema de Inventario</h3>
+          <p>Control total de inventario con seguimiento en tiempo real</p>
+          <ul class="project-features">
+            <li>Seguimiento en tiempo real</li>
+            <li>Alertas automáticas</li>
+            <li>Reportes personalizados</li>
+          </ul>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="project-image">
+            <img
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+              alt="CRM"
+            />
+          </div>
+          <h3>CRM Empresarial</h3>
+          <p>Gestión integral de relaciones con clientes</p>
+          <ul class="project-features">
+            <li>Seguimiento de ventas</li>
+            <li>Gestión de contactos</li>
+            <li>Automatización de marketing</li>
+          </ul>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="project-image">
+            <img
+              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+              alt="Dashboard"
+            />
+          </div>
+          <h3>Dashboard Analítico</h3>
+          <p>Visualización de datos en tiempo real</p>
+          <ul class="project-features">
+            <li>Métricas en tiempo real</li>
+            <li>Gráficos interactivos</li>
+            <li>Exportación de reportes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios" class="testimonials">
+      <h2 data-aos="fade-up">Lo que dicen nuestros clientes</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card" data-aos="fade-up">
+          <div class="testimonial-content">
+            <p>"Visonixro transformó completamente la manera en que manejamos nuestro inventario. ¡Increíble servicio!"</p>
+            <div class="testimonial-author">
+              <h4>Carlos Mendoza</h4>
+              <p>Gerente de Operaciones</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="testimonial-content">
+            <p>"La aplicación de CRM que desarrollaron superó todas nuestras expectativas. El equipo es muy profesional."</p>
+            <div class="testimonial-author">
+              <h4>Ana Martínez</h4>
+              <p>Directora Comercial</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios" class="benefits">
+      <h2 data-aos="fade-up">Solución Integral para tu Negocio</h2>
+      <div class="benefits-intro" data-aos="fade-up">
+        <h3>¡Optimiza tu negocio con nuestra plataforma inteligente!</h3>
+        <p>Una solución integral, eficiente y accesible para gestionar ventas, inventarios, créditos y finanzas, todo en un solo lugar.</p>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-card" data-aos="fade-up">
+          <div class="benefit-icon">
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+          <h3>Gestión de Ventas</h3>
+          <ul class="feature-list">
+            <li>
+              <strong>Ventas al Contado y a Crédito:</strong>
+              <p>Simplifica cada transacción, sin importar el método de pago.</p>
+            </li>
+            <li>
+              <strong>Consumidor Final:</strong>
+              <p>Realiza ventas directas de forma rápida y precisa.</p>
+            </li>
+            <li>
+              <strong>Facturación Dinámica:</strong>
+              <p>Emite facturas con múltiples formas de pago registradas en una sola venta.</p>
+            </li>
+            <li>
+              <strong>Guardado de Pedidos:</strong>
+              <p>Guarda ventas pendientes para facturación posterior.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="benefit-icon">
+            <i class="fas fa-cash-register"></i>
+          </div>
+          <h3>Cortes de Caja y Finanzas</h3>
+          <ul class="feature-list">
+            <li>
+              <strong>Menú Financiero:</strong>
+              <p>Accede fácilmente a tus informes clave.</p>
+            </li>
+            <li>
+              <strong>Gastos y Ventas en Tiempo Real:</strong>
+              <p>Controla el flujo diario de dinero.</p>
+            </li>
+            <li>
+              <strong>Gestión Completa:</strong>
+              <p>Monitorea ventas, gastos, créditos y más desde un solo panel.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="benefit-icon">
+            <i class="fas fa-credit-card"></i>
+          </div>
+          <h3>Gestión de Créditos</h3>
+          <ul class="feature-list">
+            <li>
+              <strong>Seguimiento de Pagos:</strong>
+              <p>Visualiza saldos pendientes y controla los vencimientos.</p>
+            </li>
+            <li>
+              <strong>Clientes a Crédito:</strong>
+              <p>Administra créditos con plazos personalizados definidos por el administrador.</p>
+            </li>
+            <li>
+              <strong>Reportes Detallados:</strong>
+              <p>Conoce el estado financiero de cada cliente y sus movimientos.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="benefit-card" data-aos="fade-up">
+          <div class="benefit-icon">
+            <i class="fas fa-boxes"></i>
+          </div>
+          <h3>Gestión de Inventario</h3>
+          <ul class="feature-list">
+            <li>
+              <strong>Control de Entradas y Salidas:</strong>
+              <p>Registros automáticos y actualizaciones al instante.</p>
+            </li>
+            <li>
+              <strong>Notificación de Bajo Stock:</strong>
+              <p>Asegura la reposición oportuna de productos.</p>
+            </li>
+            <li>
+              <strong>Módulo de Inventario Dedicado:</strong>
+              <p>Control total por usuario asignado.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="prestamistas" class="lenders">
+      <div class="lenders-header" data-aos="fade-up">
+        <h2>Plataforma Integral para Prestamistas</h2>
+        <div class="lenders-intro">
+          <h3>Optimiza la gestión de tu negocio financiero</h3>
+          <p>Nuestra plataforma está diseñada para facilitar el manejo de créditos, clientes y cobranzas con herramientas avanzadas y una interfaz intuitiva.</p>
+        </div>
+      </div>
+
+      <div class="lenders-grid">
+        <div class="lender-card" data-aos="fade-right">
+          <div class="lender-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Gestión Eficiente de Clientes</h3>
+          <ul class="lender-features">
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <span>Registro y control de clientes con historial detallado</span>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <span>Segmentación y seguimiento de cuentas en mora</span>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <span>Ubicación de domicilios con Google Maps para verificación y cobro</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="lender-card" data-aos="fade-up">
+          <div class="lender-icon">
+            <i class="fas fa-chart-pie"></i>
+          </div>
+          <h3>Control Total de Finanzas</h3>
+          <ul class="lender-features">
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <span>Emisión de cotizaciones y solicitudes en segundos</span>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <span>Cálculo de pagos con interés simple o compuesto</span>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <span>Balances financieros automáticos</span>
+            </li>
+            <li>
+              <i class="fas fa-check-circle"></i>
+              <span>Control de recibos de efectivo de cobradores de campo</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="lender-card" data-aos="fade-left">
+          <div class="lender-icon">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <h3>Administración de Personal</h3>
+          <div class="roles-grid">
+            <div class="role-item">
+              <i class="fas fa-user-tie"></i>
+              <h4>Cobrador</h4>
+              <p>Seguimiento de pagos y clientes</p>
+            </div>
+            <div class="role-item">
+              <i class="fas fa-cash-register"></i>
+              <h4>Cajero/Vendedor</h4>
+              <p>Gestión de ingresos y egresos</p>
+            </div>
+            <div class="role-item">
+              <i class="fas fa-user-cog"></i>
+              <h4>Administrador</h4>
+              <p>Supervisión avanzada</p>
+            </div>
+          </div>
+          <p class="role-extra">Gestión de comisiones para vendedores y cobradores</p>
+        </div>
+      </div>
+
+      <div class="documents-section" data-aos="fade-up">
+        <div class="documents-header">
+          <i class="fas fa-file-alt"></i>
+          <h3>Documentación y Reportes</h3>
+        </div>
+        <div class="documents-grid">
+          <div class="document-item">
+            <i class="fas fa-receipt"></i>
+            <p>Impresión de recibos de pago</p>
+          </div>
+          <div class="document-item">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <p>Generación de estados de cuenta</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lenders-cta" data-aos="fade-up">
+        <h3>¿Listo para optimizar tu negocio financiero?</h3>
+        <p>Descubre cómo nuestra plataforma puede transformar tu gestión de préstamos</p>
+        <a href="https://wa.me/50488632788" class="cta-button">
+          <i class="fab fa-whatsapp"></i> Solicita una demostración
+        </a>
+      </div>
+    </section>
+
+    <section id="sistema" class="system-features">
+      <h2 data-aos="fade-up">Sistema Profesional y Seguro</h2>
+
+      <div class="features-container">
+        <div class="system-card" data-aos="fade-up">
+          <div class="system-icon">
+            <i class="fas fa-users-cog"></i>
+          </div>
+          <h3>Estructura Modular</h3>
+          <ul class="system-list">
+            <li><i class="fas fa-check"></i> 3 usuarios de caja</li>
+            <li><i class="fas fa-check"></i> 1 administrador</li>
+            <li><i class="fas fa-check"></i> 1 usuario de inventario</li>
+            <li><i class="fas fa-check"></i> 1 contador</li>
+          </ul>
+        </div>
+
+        <div class="system-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="system-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Reportes Financieros Completos</h3>
+          <ul class="system-list">
+            <li><i class="fas fa-check"></i> Libros Diario y Mayor</li>
+            <li><i class="fas fa-check"></i> Reportes de ventas y compras</li>
+            <li><i class="fas fa-check"></i> Control de gastos</li>
+            <li><i class="fas fa-check"></i> Estado de resultados</li>
+          </ul>
+        </div>
+
+        <div class="system-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="system-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Seguridad y Confiabilidad</h3>
+          <ul class="system-list">
+            <li><i class="fas fa-check"></i> Protección de datos</li>
+            <li><i class="fas fa-check"></i> Respaldos automáticos</li>
+            <li><i class="fas fa-check"></i> Control de accesos</li>
+            <li><i class="fas fa-check"></i> Auditoría de cambios</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="system-cta" data-aos="fade-up">
+        <h3>Confía en un sistema completo, diseñado para que tengas el control total de tu negocio</h3>
+        <p>La tranquilidad de que todo fluye de forma ordenada y profesional.</p>
+        <a href="https://wa.me/50488632788" class="cta-button">
+          <i class="fab fa-whatsapp"></i> Solicita una demostración
+        </a>
+      </div>
+    </section>
+
+    <section id="contacto" class="contact">
+      <h2 data-aos="fade-up">Contacta con Nosotros</h2>
+      <div class="contact-content">
+        <div class="contact-info" data-aos="fade-right">
+          <h3>¿Listo para transformar tu negocio?</h3>
+          <p>Desde nuestra sede en Roatán, Islas de la Bahía, Honduras, ofrecemos soluciones tecnológicas de primer nivel para toda América Latina.</p>
+          <div class="contact-details">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <p>Roatán, Islas de la Bahía, Honduras</p>
+            </div>
+            <div class="contact-item">
+              <i class="fab fa-whatsapp"></i>
+              <p>+504 8863-2788</p>
+            </div>
+          </div>
+          <a href="https://wa.me/50488632788" class="whatsapp-button">
+            <i class="fab fa-whatsapp"></i> Chatear en WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="footer-logo">VISONIXRO</div>
+          <p>Soluciones AppSheet Profesionales</p>
+          <p>Roatán, Islas de la Bahía, Honduras</p>
+        </div>
+        <div class="footer-links">
+          <h4>Enlaces Rápidos</h4>
+          <a href="#inicio">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="#about">Nosotros</a>
+          <a href="#tecnologias">Tecnologías</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+        <div class="footer-links">
+          <h4>Servicios</h4>
+          <a href="#servicios">Apps Móviles</a>
+          <a href="#servicios">Gestión de Datos</a>
+          <a href="#servicios">Automatización</a>
+          <a href="#servicios">Consultoría</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contacto</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Roatán, Islas de la Bahía</p>
+          <p><i class="fab fa-whatsapp"></i> +504 8863-2788</p>
+          <div class="social-links">
+            <a href="https://wa.me/50488632788"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Visonixro. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <!-- Floating Social Media Button -->
+    <div class="fab-container" data-aos="fade-up">
+      <button class="fab-main" id="fab-toggle" aria-label="Toggle social media links" aria-expanded="false">
+        <i class="fas fa-share-alt"></i>
+      </button>
+      <div class="fab-menu" id="fab-menu">
+        <a href="https://wa.me/50488632788" class="fab-item" target="_blank" title="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.facebook.com/share/1FcnVQfbyP/" class="fab-item" target="_blank" title="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/visonixro?igsh=Z3hubWpwdzRpeDhm" class="fab-item" target="_blank" title="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://x.com/ViSonixRo?t=uu5YQRmeTqZaGKuWjp8Mzg&s=09" class="fab-item" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: true,
+      });
+
+      // Cambiar el fondo del nav al hacer scroll
+      window.addEventListener("scroll", function () {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 50) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+        }
+      });
+
+      // Theme toggle functionality
+      const themeToggle = document.getElementById("theme-toggle");
+      const themeIcon = document.getElementById("theme-icon");
+      const html = document.documentElement;
+
+      // Load saved theme from localStorage
+      const savedTheme = localStorage.getItem("theme") || "light";
+      if (savedTheme === "dark") {
+        html.classList.add("dark-theme");
+        themeIcon.classList.replace("fa-sun", "fa-moon");
+      } else {
+        html.classList.add("light-theme");
+        themeIcon.classList.replace("fa-moon", "fa-sun");
+      }
+
+      themeToggle.addEventListener("click", () => {
+        if (html.classList.contains("light-theme")) {
+          html.classList.remove("light-theme");
+          html.classList.add("dark-theme");
+          themeIcon.classList.replace("fa-sun", "fa-moon");
+          localStorage.setItem("theme", "dark");
+        } else {
+          html.classList.remove("dark-theme");
+          html.classList.add("light-theme");
+          themeIcon.classList.replace("fa-moon", "fa-sun");
+          localStorage.setItem("theme", "light");
+        }
+      });
+
+      // Floating Action Button Toggle
+      const fabToggle = document.getElementById("fab-toggle");
+      const fabMenu = document.getElementById("fab-menu");
+      const fabContainer = document.querySelector(".fab-container");
+
+      fabToggle.addEventListener("click", () => {
+        const isExpanded = fabMenu.classList.toggle("active");
+        fabToggle.setAttribute("aria-expanded", isExpanded);
+      });
+
+      // Close FAB menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!fabContainer.contains(e.target) && fabMenu.classList.contains("active")) {
+          fabMenu.classList.remove("active");
+          fabToggle.setAttribute("aria-expanded", false);
+        }
+      });
+    </script>
+  </body>
+</html>

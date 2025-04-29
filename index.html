@@ -2077,6 +2077,25 @@
           document.body.style.overflow = "";
         }
       });
+       let scrollStep = 1; // Velocidad del scroll (pixeles por paso)
+let direction = 1;  // 1 = hacia abajo, -1 = hacia arriba
+
+function autoScroll() {
+  window.scrollBy(0, scrollStep * direction);
+
+  const bottomReached = window.innerHeight + window.scrollY >= document.body.scrollHeight;
+  const topReached = window.scrollY === 0;
+
+  if (bottomReached) {
+    direction = -1; // Cambiar dirección hacia arriba
+  } else if (topReached) {
+    direction = 1; // Cambiar dirección hacia abajo
+  }
+}
+
+// Llama autoScroll cada 10ms para un efecto suave
+setInterval(autoScroll, 10);
+
     </script>
   </body>
 </html>

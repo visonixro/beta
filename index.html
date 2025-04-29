@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Visonixro - Soluciones AppSheet Profesionales</title>
     <link rel="icon" type="image/png" href="logo.png" />
     <link
@@ -44,7 +44,8 @@
 
       html {
         scroll-behavior: smooth;
-        font-size: 16px; /* Base font size for rem units */
+        font-size: 16px;
+        overflow-x: hidden;
       }
 
       body {
@@ -52,7 +53,8 @@
         background-color: var(--primary-color);
         color: var(--text-color);
         line-height: 1.6;
-        overflow-x: hidden; /* Prevent horizontal overflow */
+        overflow-x: hidden;
+        animation: fadeInPage 0.5s ease-in;
       }
 
       /* Navegación */
@@ -109,7 +111,7 @@
 
       .nav-links {
         display: flex;
-        list-style: none;
+        list-style: none by;
         gap: 2rem;
         align-items: center;
       }
@@ -122,6 +124,7 @@
 
       .nav-links a:hover {
         color: var(--accent-color);
+        transform: scale(1.05);
       }
 
       .theme-toggle {
@@ -202,6 +205,7 @@
 
       .modal-menu a:hover {
         color: var(--accent-color);
+        transform: scale(1.05);
       }
 
       .modal-menu .theme-toggle {
@@ -230,6 +234,7 @@
         justify-content: center;
         text-align: center;
         position: relative;
+        background-attachment: fixed; /* Parallax effect */
       }
 
       .dark-theme header {
@@ -280,6 +285,7 @@
       .whatsapp-button:hover {
         transform: translateY(-3px);
         box-shadow: 0 5px 15px rgba(48, 79, 254, 0.4);
+        background: #1e40af; /* Slightly darker on hover */
       }
 
       /* Secciones */
@@ -294,6 +300,17 @@
         font-size: 2.5rem;
         margin-bottom: 3rem;
         color: var(--text-color);
+        position: relative;
+      }
+
+      section h2::after {
+        content: "";
+        width: 100px;
+        height: 4px;
+        background: var(--accent-color);
+        display: block;
+        margin: 1rem auto;
+        border-radius: 2px;
       }
 
       /* Servicios */
@@ -309,6 +326,7 @@
         border-radius: 15px;
         text-align: center;
         transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
 
       .dark-theme .service-card {
@@ -316,13 +334,19 @@
       }
 
       .service-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       }
 
       .service-card i {
         font-size: 3rem;
         color: var(--accent-color);
         margin-bottom: 1.5rem;
+        transition: var(--transition);
+      }
+
+      .service-card:hover i {
+        transform: rotate(10deg);
       }
 
       .service-card h3 {
@@ -341,6 +365,7 @@
         border-radius: 15px;
         overflow: hidden;
         transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
 
       .dark-theme .project-card {
@@ -348,12 +373,15 @@
       }
 
       .project-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        animation: bounce 0.3s ease;
       }
 
       .project-image {
         height: 200px;
         overflow: hidden;
+        position: relative;
       }
 
       .project-image img {
@@ -504,6 +532,7 @@
         border-radius: 15px;
         text-align: center;
         transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
 
       .dark-theme .tech-card {
@@ -511,7 +540,8 @@
       }
 
       .tech-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       }
 
       .tech-card i {
@@ -557,10 +587,16 @@
         background: rgba(0, 0, 0, 0.05);
         padding: 2rem;
         border-radius: 15px;
+        transition: var(--transition);
       }
 
       .dark-theme .testimonial-card {
         background: rgba(255, 255, 255, 0.05);
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       }
 
       .testimonial-content p {
@@ -621,6 +657,7 @@
         border-radius: 15px;
         padding: 2rem;
         transition: var(--transition);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
 
       .dark-theme .benefit-card {
@@ -628,7 +665,8 @@
       }
 
       .benefit-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       }
 
       .benefit-icon {
@@ -640,6 +678,11 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 1.5rem;
+        transition: var(--transition);
+      }
+
+      .benefit-icon:hover {
+        transform: rotate(360deg);
       }
 
       .benefit-icon i {
@@ -696,6 +739,7 @@
       .system-card:hover {
         transform: translateY(-10px);
         background: rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       }
 
       .dark-theme .system-card:hover {
@@ -862,6 +906,7 @@
 
       .role-item:hover {
         background: rgba(0, 0, 0, 0.05);
+        transform: translateY(-5px);
       }
 
       .dark-theme .role-item:hover {
@@ -1011,6 +1056,7 @@
 
       .footer-links a:hover {
         color: var(--accent-color);
+        transform: scale(1.05);
       }
 
       .social-links {
@@ -1027,6 +1073,7 @@
 
       .social-links a:hover {
         color: var(--accent-color);
+        transform: scale(1.2);
       }
 
       .footer-bottom {
@@ -1137,6 +1184,10 @@
 
       /* Responsive adjustments */
       @media (max-width: 1024px) {
+        html {
+          font-size: 15px;
+        }
+
         .hero-content h1 {
           font-size: 3rem;
         }
@@ -1165,7 +1216,7 @@
 
       @media (max-width: 768px) {
         html {
-          font-size: 14px; /* Adjust base font size for smaller screens */
+          font-size: 14px;
         }
 
         .nav-links {
@@ -1262,6 +1313,10 @@
         .social-links {
           justify-content: center;
         }
+
+        header {
+          background-attachment: scroll; /* Disable parallax on mobile */
+        }
       }
 
       @media (max-width: 480px) {
@@ -1338,6 +1393,33 @@
           transform: translateY(0);
         }
       }
+
+      @keyframes fadeInPage {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounce {
+        0% {
+          transform: translateY(-10px);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+        100% {
+          transform: translateY(-10px);
+        }
+      }
+      .nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
     </style>
   </head>
   <body>
@@ -1466,8 +1548,8 @@
         <div class="project-card" data-aos="fade-up">
           <div class="project-image">
             <img
-              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-              alt="Gestión de Inventario"
+              src="https://thumbs.dreamstime.com/b/concepto-de-sistema-administraci%C3%B3n-inventarios-inteligente-administrador-inventario-mediante-tablet-digital-que-muestra-la-343953741.jpg"
+              alt="Sistema de Inventario"
             />
           </div>
           <h3>Sistema de Inventario</h3>
@@ -1481,8 +1563,8 @@
         <div class="project-card" data-aos="fade-up" data-aos-delay="200">
           <div class="project-image">
             <img
-              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-              alt="CRM"
+              src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+              alt="CRM Empresarial"
             />
           </div>
           <h3>CRM Empresarial</h3>
@@ -1496,8 +1578,8 @@
         <div class="project-card" data-aos="fade-up" data-aos-delay="400">
           <div class="project-image">
             <img
-              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-              alt="Dashboard"
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+              alt="Dashboard Analítico"
             />
           </div>
           <h3>Dashboard Analítico</h3>
@@ -1942,7 +2024,7 @@
         hamburger.setAttribute("aria-expanded", isExpanded);
         hamburger.querySelector("i").classList.toggle("fa-bars");
         hamburger.querySelector("i").classList.toggle("fa-times");
-        document.body.style.overflow = isExpanded ? "hidden" : ""; // Prevent scrolling when menu is open
+        document.body.style.overflow = isExpanded ? "hidden" : "";
       });
 
       closeMenu.addEventListener("click", () => {

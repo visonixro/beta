@@ -2077,14 +2077,16 @@
           document.body.style.overflow = "";
         }
       });
-       let scrollStep = 1; // Velocidad del scroll (pixeles por paso)
+     let scrollStep = 1; // Velocidad del scroll (pixeles por paso)
 let direction = 1;  // 1 = hacia abajo, -1 = hacia arriba
+
+let scrollInterval = setInterval(autoScroll, 10); // Inicia el scroll automático
 
 function autoScroll() {
   window.scrollBy(0, scrollStep * direction);
 
   const bottomReached = window.innerHeight + window.scrollY >= document.body.scrollHeight;
-  const topReached = window.scrollY === 0;
+  const topReached = window.scrollY <= 0;
 
   if (bottomReached) {
     direction = -1; // Cambiar dirección hacia arriba
@@ -2093,8 +2095,22 @@ function autoScroll() {
   }
 }
 
-// Llama autoScroll cada 10ms para un efecto suave
-setInterval(autoScroll, 10);
+// Detener el scroll automático al detectar interacción del usuario
+function stopAutoScroll() {
+  clearInterval(scrollInterval);
+  window.removeEventListener('mousedown', stopAutoScroll);
+  window.removeEventListener('touchstart', stopAutoScroll);
+  window.removeEventListener('wheel', stopAutoScroll);
+  window.removeEventListener('keydown', stopAutoScroll);
+  window.removeEventListener('mousemove', stopAutoScroll);
+}
+
+window.addEventListener('mousedown', stopAutoScroll);
+window.addEventListener('touchstart', stopAutoScroll);
+window.addEventListener('wheel', stopAutoScroll);
+window.addEventListener('keydown', stopAutoScroll);
+window.addEventListener('mousemove', stopAutoScroll);
+
 
     </script>
   </body>
